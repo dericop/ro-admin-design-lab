@@ -1,0 +1,48 @@
+body{
+	background-color:rgb(247, 247, 247);
+	font-family: 'Roboto', sans-serif;
+}
+
+.cal-table{
+	margin-top: 100px;
+}
+
+.feed-container{
+	margin-top: 100px;
+}
+
+.feed-title{
+	color:rgba(0, 0, 0, 0.65);
+	font-size: 20px;
+	font-weight: 300;
+	padding-left: 0px;
+}
+
+.form_radio_button{
+	margin-left: 48% !important;
+}
+
+.item{
+	background: #fff;
+    border: solid 1px #c7c7c7;
+    border-radius: 20px;
+    box-shadow: 1px 1px 0px 2px rgba(230, 230, 230, 0.73);
+    height: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 15px;
+    padding: 10px;
+}
+
+.thumbnail{
+	margin-bottom: 0px
+}
+
+th{
+	font-weight: 400;
+	
+}
+
+#th-header{
+	font-weight: 700;
+}
