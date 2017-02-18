@@ -71,17 +71,47 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+	<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+
 	<script>
-		
+		// Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyBQKctnO3-Bb_KfiFrvIBQxntmP9OUKpcU",
+	    authDomain: "reduccion-de-obesidad-7414c.firebaseapp.com",
+	    databaseURL: "https://reduccion-de-obesidad-7414c.firebaseio.com",
+	    storageBucket: "reduccion-de-obesidad-7414c.appspot.com",
+	    messagingSenderId: "610665651722"
+	  };
+	  firebase.initializeApp(config);
+
 		$("#btn_login").click(function(e){
 			var email = document.getElementById("email");
 			var password = document.getElementById("password");
 
 			if(email.checkValidity() && password.checkValidity()){
 				e.preventDefault();
-				window.open("feed.html", "_self");
+				
+				firebase.auth().signInWithEmailAndPassword(email.value, password.value).then(function(token){
+					console.log(token);
+					localStorage.setItem("firebase", firebase);
+					window.open("/feeds","_self");
+
+				}).catch(function(error) {
+				  // Handle Errors here.
+				  var errorCode = error.code;
+				  var errorMessage = error.message;
+				  if (errorCode === 'auth/wrong-password') {
+				    alert('Contraseña Incorrecta.');
+				  } else if(errorCode == 'auth/user-not-found'){
+				    alert("El correo ingresado no está registrado");
+				  }
+				  
+				});
 			}
 		});
+
+
+
 
 	</script>
 
