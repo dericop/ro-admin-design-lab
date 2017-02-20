@@ -1,6 +1,14 @@
 {
+  "database": {
+	"rules": "database-rules.json"
+  },
   "hosting": {
     "public": "public",
-    "cleanUrls": true
+    "cleanUrls": true,
+    "ignore": [
+      "firebase.json",
+      "database-rules.json",
+      "storage.rules"
+    ]
   }
 }
