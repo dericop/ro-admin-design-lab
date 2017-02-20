@@ -14,6 +14,10 @@ body{
   vertical-align: top;
 }
 
+.loader svg{
+	margin-right: 30px;
+}
+
 svg path,
 svg rect{
   fill: #FF6700;

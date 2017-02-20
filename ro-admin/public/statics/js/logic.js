@@ -15,7 +15,7 @@ function QualificationAdmin(){
 	this.emailForm = document.getElementById("email");
 	this.passwordForm = document.getElementById("password");
 	this.loginButton = document.getElementById("btn_login");
-	this.loader = document.getElementById("loader");
+	this.loader = document.getElementsByClassName("loader")[0];
 
 	//Listeners
 	this.loginButton.addEventListener("click", this.logIn.bind(this));
@@ -50,6 +50,7 @@ QualificationAdmin.prototype.logIn = function(e){
 		
 		this.auth.signInWithEmailAndPassword(this.emailForm.value, this.passwordForm.value).then(function(token){
 			//Login satisfactorio
+			//localstorage.setItem("firebase", window.firebase);
 			$.magnificPopup.close();
 		}).catch(function(error) {
 		  // Handle Errors here.
@@ -65,22 +66,23 @@ QualificationAdmin.prototype.logIn = function(e){
 }
 
 //Obtener el listado de publicaciones de la base de datos
-QualificationAdmin.prototype.loadPosts = function(){
+QualificationAdmin.prototype.loadPosts = function(callback){
 	this.postsRef = this.database.ref("user-posts");
 	this.postsRef.off();
+	var that = this;
+	this.postsRef.limitToLast(15).on('child_added', function(data){
+		callback(data.val());
+		that.loader.className+=" hide";
+	});
 }
 
 //Trigger para el cambio de estado de un usuario
 QualificationAdmin.prototype.onAuthStateChanged = function(user){
-	console.log("El estado del usuario ha cambiado");
-}
 
-//Inicialización al cargar la página
-window.onload = function(){
-	
-	window.qualitificationAdmin = new QualificationAdmin();
-
-	if(!qualitificationAdmin.auth.currentUser){
+	if(firebase.auth().currentUser){
+		$.magnificPopup.close();
+	}else{
+		console.log("No tiene usuario");
 		$.magnificPopup.open({
 		  items: {
 		    src: '#test-popup', // can be a HTML string, jQuery object, or CSS selector
@@ -91,6 +93,5 @@ window.onload = function(){
 	      showCloseBtn : false,
 		});
 	}
-	
 }
 

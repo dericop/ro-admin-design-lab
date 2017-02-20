@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" ng-app="qualificationApp">
 <head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
@@ -45,7 +45,7 @@
 		</div>
 	</div>
 
-	<div class="container feed-container">
+	<div class="container feed-container" ng-controller="PostsController as postC">
 
 		<div class="loader loader--style8 center-block" title="7">
 		  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -68,29 +68,15 @@
 		  </svg>
 		</div>
 
-		<div class="row item">
+		<div class="row item" ng-repeat="post in postC.posts">
 			<div class="col-xs-12 col-md-4">
-			    <a href="#" class="thumbnail">
-			      <img src="http://placehold.it/280x280" alt="...">
+			    <a href="" class="thumbnail">
+			      <img src="{{post.image}}" alt="...">
 			    </a>
 			</div>
 
 			<div class="col-xs-12 col-md-8">
-				<h2 class="col-md-12 feed-title">Este es el titulo de la publicación que puede llegar a ser de dos o tres renglones</h2>
-
-			</div>	
-
-		</div>
-
-		<div class="row item">
-			<div class="col-xs-12 col-md-4">
-			    <a href="#" class="thumbnail">
-			      <img src="http://placehold.it/280x280" alt="...">
-			    </a>
-			</div>
-
-			<div class="col-xs-12 col-md-8">
-				<h2 class="col-md-12 feed-title">Este es el titulo de la publicación que puede llegar a ser de dos o tres renglones</h2>
+				<h2 class="col-md-12 feed-title">{{post.name}}</h2>
 				<table class="table table-hover cal-table"> 
 					<thead> 
 						<tr> 
@@ -146,40 +132,16 @@
 
 		</div>
 
-		<div class="row item">
-			<div class="col-xs-12 col-md-4">
-			    <a href="#" class="thumbnail">
-			      <img src="http://placehold.it/280x280" alt="...">
-			    </a>
-			</div>
-
-			<div class="col-xs-12 col-md-8">
-				<h2 class="col-md-12 feed-title">Este es el titulo de la publicación que puede llegar a ser de dos o tres renglones</h2>
-
-			</div>	
-
-		</div>
-
-		<div class="row item">
-			<div class="col-xs-12 col-md-4">
-			    <a href="#" class="thumbnail">
-			      <img src="http://placehold.it/280x280" alt="...">
-			    </a>
-			</div>
-
-			<div class="col-xs-12 col-md-8">
-				<h2 class="col-md-12 feed-title">Este es el titulo de la publicación que puede llegar a ser de dos o tres renglones</h2>
-
-			</div>	
-
-		</div>
 	</div>
 
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
 	<script src="libs/magnific-popup/jquery.magnific-popup.min.js"></script>
 	<script src="statics/js/logic.js"></script>
+	<script src="statics/js/qualification.js"></script>
+
 
 </body>
 </html>
