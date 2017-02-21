@@ -13,7 +13,7 @@
 
 </head>
 <body>
-	<nav class="navbar navbar-default navbar-fixed-top">
+	<nav class="navbar navbar-default navbar-fixed-top top-nav">
       <div class="container">
         <div class="navbar-header center-block">
           <a class="navbar-brand" href="#">CoRus - CoCono Calificación</a>
@@ -77,7 +77,7 @@
 
 			<div class="col-xs-12 col-md-8">
 				<h2 class="col-md-12 feed-title">{{post.name}}</h2>
-				<table class="table table-hover cal-table"> 
+				<table class="table table-hover cal-table" ng-if="postC.isFood(post)"> 
 					<thead> 
 						<tr> 
 							<th id="th-header">Criterio</th> 
@@ -132,7 +132,24 @@
 
 		</div>
 
+		<nav class="pagination-nav" aria-label="Page navigation">
+		  <ul class="pagination">
+		    <li>
+		      <a href="#" aria-label="Previous" ng-click="postC.previousPage()">
+		        <span aria-hidden="true">Anterior</span>
+		      </a>
+		    </li>
+		    <li>
+		      <a href="" aria-label="Next" ng-click="postC.nextPage()">
+		        <span aria-hidden="true">Siguiente</span>
+		      </a>
+		    </li>
+		  </ul>
+		</nav>
+
 	</div>
+
+	
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

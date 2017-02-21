@@ -66,11 +66,31 @@ QualificationAdmin.prototype.logIn = function(e){
 }
 
 //Obtener el listado de publicaciones de la base de datos
-QualificationAdmin.prototype.loadPosts = function(callback){
+QualificationAdmin.prototype.loadPostsStartAt = function(callback, startat){
 	this.postsRef = this.database.ref("user-posts");
 	this.postsRef.off();
 	var that = this;
-	this.postsRef.limitToLast(15).on('child_added', function(data){
+
+	if(startat != undefined){
+		console.log(startat)
+		this.postsRef.orderByKey().limitToFirst(10).startAt(startat).once('value', function(data){
+			callback(data.val());
+			that.loader.className+=" hide";
+		});
+	}else{
+		this.postsRef.orderByKey().limitToFirst(10).once('value', function(data){
+			callback(data.val());
+			that.loader.className+=" hide";
+		});
+	}
+}
+
+QualificationAdmin.prototype.loadPostsEndAt = function(callback, endAt){
+	this.postsRef = this.database.ref("user-posts");
+	this.postsRef.off();
+	var that = this;
+	
+	this.postsRef.orderByKey().limitToLast(10).endAt(endAt).once('value', function(data){
 		callback(data.val());
 		that.loader.className+=" hide";
 	});
@@ -88,7 +108,7 @@ QualificationAdmin.prototype.onAuthStateChanged = function(user){
 		    src: '#test-popup', // can be a HTML string, jQuery object, or CSS selector
 		    type: 'inline',
 		  },
-		  //closeOnBgClick :false, 
+		  closeOnBgClick :false, 
 		  closeOnContentClick : false, 
 	      showCloseBtn : false,
 		});

@@ -4,7 +4,7 @@ body{
 }
 
 .loader{
-  margin-left: 50% !important;
+  margin-left: 45% !important;
   height: 100px;
   width: 20%;
   text-align: center;
@@ -25,7 +25,7 @@ svg rect{
 
 .feed-container{
 	margin-top: 150px;
-	margin-bottom: 100px;
+	margin-bottom: 50px;
 }
 
 .login-container{
@@ -60,7 +60,7 @@ form label{
   margin: 20px auto;
 }
 
-nav{
+.top-nav{
 	height: 100px;
 	background: #00adee !important;
 	box-shadow:0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
@@ -72,8 +72,8 @@ nav{
 	margin-top: 25px;
 }
 
-.cal-table{
-	margin-top: 100px;
+.cal-table th{
+	text-align: center;
 }
 
 .feed-title{
@@ -109,4 +109,13 @@ th{
 
 #th-header{
 	font-weight: 700;
+}
+
+.pagination{
+	margin-left: 48%;
+}
+
+.pagination-nav{
+	margin-top: 50px;
+	margin-bottom: 50px;
 }
