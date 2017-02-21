@@ -65,6 +65,18 @@ QualificationAdmin.prototype.logIn = function(e){
 	}
 }
 
+QualificationAdmin.prototype.loadPendingPosts = function(callback){
+	this.postsRef = this.database.ref("user-posts");
+	this.postsRef.off();
+	var that = this;
+
+	this.postsRef.orderByChild("result").equalTo(null).once('value', function(data){
+		callback(data.val());
+		that.loader.className+=" hide";
+	});
+	
+}
+
 //Obtener el listado de publicaciones de la base de datos
 QualificationAdmin.prototype.loadPostsStartAt = function(callback, startat){
 	this.postsRef = this.database.ref("user-posts");

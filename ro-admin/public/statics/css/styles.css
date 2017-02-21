@@ -4,7 +4,7 @@ body{
 }
 
 .loader{
-  margin-left: 45% !important;
+  margin-left: 42% !important;
   height: 100px;
   width: 20%;
   text-align: center;
@@ -112,10 +112,14 @@ th{
 }
 
 .pagination{
-	margin-left: 48%;
+	margin-left: 40%;
+	font-size: 18px;
 }
 
 .pagination-nav{
-	margin-top: 50px;
-	margin-bottom: 50px;
+	margin-bottom: 30px;
+}
+
+.itemSelected{
+	background-color: #ddd !important;
 }
