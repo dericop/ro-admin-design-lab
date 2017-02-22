@@ -124,3 +124,18 @@ th{
 .itemSelected{
 	background-color: #ddd !important;
 }
+
+.qualifiedItem{
+	background-color: rgba(0, 0, 0, 0.03);
+}
+
+.activity-qualification{
+	margin-top:4.3em;
+}
+.btn-q{
+	width: 200px;
+}
+
+.btn-qualification{
+	margin-top: 2.3em;
+}

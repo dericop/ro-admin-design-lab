@@ -47,6 +47,22 @@
 
 	<div class="container feed-container" ng-controller="PostsController as postC">
 
+
+		<nav class="pagination-nav" aria-label="Page navigation">
+		  <ul class="pagination">
+		    <li>
+		      <a id="btn-item-pending" href="#" aria-label="Previous" ng-click="postC.setPending()">
+		        <span aria-hidden="true">Pendientes</span>
+		      </a>
+		    </li>
+		    <li>
+		      <a id="btn-item-historic" href="" aria-label="Next" ng-click="postC.setHistoric()">
+		        <span aria-hidden="true">Histórico</span>
+		      </a>
+		    </li>
+		  </ul>
+		</nav>
+
 		<div class="loader loader--style8 center-block" title="7">
 		  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 		     width="44px" height="50px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
@@ -68,22 +84,7 @@
 		  </svg>
 		</div>
 
-		<nav class="pagination-nav" aria-label="Page navigation">
-		  <ul class="pagination">
-		    <li>
-		      <a id="btn-item-pending" href="#" aria-label="Previous" ng-click="postC.setPending()">
-		        <span aria-hidden="true">Pendientes</span>
-		      </a>
-		    </li>
-		    <li>
-		      <a id="btn-item-historic" href="" aria-label="Next" ng-click="postC.setHistoric()">
-		        <span aria-hidden="true">Histórico</span>
-		      </a>
-		    </li>
-		  </ul>
-		</nav>
-
-		<div class="row item" ng-repeat="post in postC.posts" ng-if="post.result!=0">
+		<div class="row item" ng-repeat="post in postC.posts" ng-if="postC.shouldBeVisible(post)" ng-class="{'qualifiedItem':postC.historicSelected}">
 			<div class="col-xs-12 col-md-4">
 			    <a href="" class="thumbnail">
 			      <img src="{{post.image}}" alt="...">
@@ -97,8 +98,8 @@
 						<tr> 
 							<th id="th-header">Criterio</th> 
 							<th>No</th> 
-							<th>Medio bajo</th> 
 							<th>Bajo</th> 
+							<th>Medio bajo</th> 
 							<th>Medio</th> 
 							<th>Medio Alto</th> 
 							<th>Alto</th> 
@@ -106,44 +107,71 @@
 					</thead> 
 					<tbody> 
 						<tr> 
-							<th scope="row">Procesamiento Industrial</th> 
-							<td><input class="form_radio_button" type="radio" name=""/></td> 
-							<td><input class="form_radio_button" type="radio" name=""/></td>  
-							<td><input class="form_radio_button" type="radio" name=""/></td>  
-							<td><input class="form_radio_button" type="radio" name=""/></td>  
-							<td><input class="form_radio_button" type="radio" name=""/></td>  
-							<td><input class="form_radio_button" type="radio" name=""/></td>  
+							<th scope="row">Procesamiento Industrial</th>
+							<td><input class="form_radio_button" type="radio" name="radioPI" value="0"/></td> 
+							<td><input class="form_radio_button" type="radio" name="radioPI" value="1"/></td>  
+							<td><input class="form_radio_button" type="radio" name="radioPI" value="3"/></td>  
+							<td><input class="form_radio_button" type="radio" name="radioPI" value="5"/></td>  
+							<td><input class="form_radio_button" type="radio" name="radioPI" value="7"/></td>  
+							<td><input class="form_radio_button" type="radio" name="radioPI" value="10"/></td>  
 						</tr>
 						<tr> 
 							<th scope="row">Azúcar Añadido</th>
-							<td><input class="form_radio_button" type="radio" name=""/></td> 
-							<td><input class="form_radio_button" type="radio" name=""/></td>  
-							<td><input class="form_radio_button" type="radio" name=""/></td>  
-							<td><input class="form_radio_button" type="radio" name=""/></td>  
-							<td><input class="form_radio_button" type="radio" name=""/></td>  
-							<td><input class="form_radio_button" type="radio" name=""/></td> 
+							<td><input class="form_radio_button" type="radio" name="radioAA" value="0"/></td> 
+							<td><input class="form_radio_button" type="radio" name="radioAA" value="0.5"/></td>  
+							<td><input class="form_radio_button" type="radio" name="radioAA" value="1"/></td>  
+							<td><input class="form_radio_button" type="radio" name="radioAA" value="1.5"/></td>  
+							<td><input class="form_radio_button" type="radio" name="radioAA" value="2.2"/></td>  
+							<td><input class="form_radio_button" type="radio" name="radioAA" value="3"/></td> 
 						</tr> 
 						<tr> 
 							<th scope="row">Grasas Saturadas</th> 
-							<td><input class="form_radio_button" type="radio" name=""/></td> 
-							<td><input class="form_radio_button" type="radio" name=""/></td>  
-							<td><input class="form_radio_button" type="radio" name=""/></td>  
-							<td><input class="form_radio_button" type="radio" name=""/></td>  
-							<td><input class="form_radio_button" type="radio" name=""/></td>  
-							<td><input class="form_radio_button" type="radio" name=""/></td> 
+							<td><input class="form_radio_button" type="radio" name="radioGS" value="0"/></td> 
+							<td><input class="form_radio_button" type="radio" name="radioGS" value="0.5"/></td>  
+							<td><input class="form_radio_button" type="radio" name="radioGS" value="1"/></td>  
+							<td><input class="form_radio_button" type="radio" name="radioGS" value="1.5"/></td>  
+							<td><input class="form_radio_button" type="radio" name="radioGS" value="2.2"/></td>  
+							<td><input class="form_radio_button" type="radio" name="radioGS" value="3"/></td> 
 						</tr> 
 						<tr> 
 							<th scope="row">Carbohidratos</th> 
-							<td><input class="form_radio_button" type="radio" name=""/></td> 
-							<td><input class="form_radio_button" type="radio" name=""/></td>  
-							<td><input class="form_radio_button" type="radio" name=""/></td>  
-							<td><input class="form_radio_button" type="radio" name=""/></td>  
-							<td><input class="form_radio_button" type="radio" name=""/></td>  
-							<td><input class="form_radio_button" type="radio" name=""/></td> 
+							<td><input class="form_radio_button" type="radio" name="radioCH" value="0"/></td> 
+							<td><input class="form_radio_button" type="radio" name="radioCH" value="0.5"/></td>  
+							<td><input class="form_radio_button" type="radio" name="radioCH" value="1"/></td>  
+							<td><input class="form_radio_button" type="radio" name="radioCH" value="1.5"/></td>  
+							<td><input class="form_radio_button" type="radio" name="radioCH" value="2.2"/></td>  
+							<td><input class="form_radio_button" type="radio" name="radioCH" value="3"/></td> 
 						</tr> 
 					</tbody> 
 				</table>
-				<button type="button" class="btn btn-success center-block">Calificar</button>
+
+				<div class="activity-qualification" ng-if="!postC.isFood(post)">
+					<table class="table table-hover cal-table"> 
+						<thead> 
+							<tr> 
+								<th>Sedentario</th>
+								<th>Bajo</th> 
+								<th>Medio bajo</th> 
+								<th>Medio</th> 
+								<th>Medio Alto</th> 
+								<th>Alto</th>
+							</tr> 
+						</thead> 
+						<tbody> 
+							<tr> 
+								<td><input class="form_radio_button" type="radio" name="activityRadio" value="0"></td> 
+								<td><input class="form_radio_button" type="radio" name="activityRadio" value="1"></td>  
+								<td><input class="form_radio_button" type="radio" name="activityRadio" value="3"></td>  
+								<td><input class="form_radio_button" type="radio" name="activityRadio" value="5"></td>  
+								<td><input class="form_radio_button" type="radio" name="activityRadio" value="7"></td>  
+								<td><input class="form_radio_button" type="radio" name="activityRadio" value="10"></td>  
+							</tr>
+						</tbody> 
+					</table>
+				</div>
+
+
+				<button type="button" class="btn btn-success center-block btn-q" ng-class="{'btn-qualification':!postC.isFood(post)}" ng-click="postC.saveQualification(post)">Calificar</button>
 			</div>	
 
 		</div>

@@ -69,6 +69,7 @@ QualificationAdmin.prototype.loadPendingPosts = function(callback){
 	this.postsRef = this.database.ref("user-posts");
 	this.postsRef.off();
 	var that = this;
+	that.loader.classList.remove("hide");
 
 	this.postsRef.orderByChild("result").equalTo(null).once('value', function(data){
 		callback(data.val());
@@ -82,6 +83,7 @@ QualificationAdmin.prototype.loadPostsStartAt = function(callback, startat){
 	this.postsRef = this.database.ref("user-posts");
 	this.postsRef.off();
 	var that = this;
+	that.loader.classList.remove("hide");
 
 	if(startat != undefined){
 		console.log(startat)
@@ -101,6 +103,7 @@ QualificationAdmin.prototype.loadPostsEndAt = function(callback, endAt){
 	this.postsRef = this.database.ref("user-posts");
 	this.postsRef.off();
 	var that = this;
+	that.loader.classList.remove("hide");
 	
 	this.postsRef.orderByKey().limitToLast(10).endAt(endAt).once('value', function(data){
 		callback(data.val());
@@ -127,3 +130,73 @@ QualificationAdmin.prototype.onAuthStateChanged = function(user){
 	}
 }
 
+QualificationAdmin.prototype.saveQualificationForFood = function(id, user, average, r_pi, r_aa, r_gs, r_ch, result){
+
+	this.postsRef = this.database.ref("user-posts");
+	var that = this;
+	var data = {
+		average: average,
+	    r_pi: r_pi,
+	    r_aa: r_aa,
+	    r_gs: r_gs,
+	    r_ch: r_ch,
+	    result: result
+	}
+	this.postsRef.orderByChild("id").equalTo(id).once('value', function(snap){
+		if(snap.val() === null){
+			//Existe en cocono
+			that.postsRef = that.database.ref("user-posts-reflexive/"+id);
+			that.postsRef.off();
+			that.postsRef.update(data);
+
+			that.postsRef = that.database.ref("user-data-reflexive/"+user+"/"+id);
+			that.postsRef.off();
+			that.postsRef.update(data);
+
+		}else{
+			//Existe en corus
+			that.postsRef = that.database.ref("user-posts/"+id);
+			that.postsRef.off();
+			that.postsRef.update(data);
+
+			that.postsRef = that.database.ref("user-data/"+user+"/"+id);
+			that.postsRef.off();
+			that.postsRef.update(data);
+
+		}
+	});
+}
+
+QualificationAdmin.prototype.saveQualificationForActivity = function(id, user, average, result){
+
+	this.postsRef = this.database.ref("user-posts");
+	var that = this;
+	var data = {
+		average: average,
+	    result: result
+	}
+	this.postsRef.orderByChild("id").equalTo(id).once('value', function(snap){
+		if(snap.val() === null){
+			//Existe en cocono
+			that.postsRef = that.database.ref("user-posts-reflexive/"+id);
+			that.postsRef.off();
+			that.postsRef.update(data);
+
+			that.postsRef = that.database.ref("user-data-reflexive/"+user+"/"+id);
+			that.postsRef.off();
+			that.postsRef.update(data);
+
+		}else{
+			//Existe en corus
+			that.postsRef = that.database.ref("user-posts/"+id);
+			that.postsRef.off();
+			that.postsRef.update(data);
+
+			that.postsRef = that.database.ref("user-data/"+user+"/"+id);
+			that.postsRef.off();
+			that.postsRef.update(data);
+
+		}
+	});
+
+}
