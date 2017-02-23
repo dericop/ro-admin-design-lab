@@ -7,11 +7,19 @@ angular.module('qualificationApp',[])
 		postsList.foodCategories = ["Desayuno", "Almuerzo", "Comida", "Algo"];
 		postsList.historicSelected = false;
 
+		$scope.curActivityValue = 0;
+
 		qualificationAdmin = new QualificationAdmin();
 		var pendingItem = document.getElementById('btn-item-pending');
 		var historicItem = document.getElementById('btn-item-historic');
 
 		pendingItem.className = "itemSelected";
+
+		postsList.logOut = function(){
+			postsList.qualificationAdmin.logOut(function(){
+				postsList.loadData();
+			});
+		}
 
 		postsList.loadData = function(){
 			postsList.posts = [];
@@ -36,7 +44,6 @@ angular.module('qualificationApp',[])
 			for(d in data)
 				postsList.posts.push(data[d]);
 
-
 			if(d)
 				postsList.lastPost = d+"";
 		}
@@ -55,6 +62,11 @@ angular.module('qualificationApp',[])
 				postsList.lastPost = "x";
 			}
 			
+		}
+
+		postsList.loadActivityPostQualification = function(post){
+			$scope.curActivityValue = post.average;
+			console.log($scope.curActivityValue);
 		}
 
 		postsList.nextPage = function(){
@@ -122,6 +134,24 @@ angular.module('qualificationApp',[])
 			return result;
 		}
 
+		postsList.removePost = function(post){
+			var index = postsList.posts.indexOf(post);
+			if(index>-1)
+				postsList.posts.splice(index, 1);
+		}
+
+		postsList.getActivityResultFromAverage = function(average){
+			var result = 0;
+			if(average<=3){
+				result = 1;
+			}else if(average>3 && average<=7){
+				result = 2;
+			}else{
+				result = 3;
+			}
+			return result;
+		}
+
 		postsList.saveQualification = function(post){
 			if(postsList.isFood(post)){
 				var radioPI = $('input[name="radioPI"]:checked').val();
@@ -132,17 +162,27 @@ angular.module('qualificationApp',[])
 				if(radioPI!=undefined && radioAA!=undefined && radioGS!=undefined && radioCH!=undefined){
 					var average = Math.round(parseFloat(radioPI) + parseFloat(radioAA) +parseFloat(radioGS) + parseFloat(radioCH));
 					var result = postsList.getResultFromAverage(average);
-					postsList.qualificationAdmin.saveQualificationForFood(post.id,post.user,average, radioPI, radioAA, radioGS, radioCH, result, post.app);
+					postsList.qualificationAdmin.saveQualificationForFood(post.id,post.user,average, radioPI, radioAA, radioGS, radioCH, result, function(){
+						if(!postsList.historicSelected){
+							postsList.removePost(post);
+							$scope.$apply();
+						}
+					});
 
 				}else{
 					alert("Verifique que haya ingresado todos los campos para calificar");
 				}
 			}else{
-				var activityRadio = $('input[name="activityRadio"]:checked').val();
+				var activityRadio = $(".activityRadio:checked").val();
 				if(activityRadio!=undefined){
-					var average = activityRadio;
-					var result = postsList.saveQualificationForActivity(average);
-					postsList.qualificationAdmin.saveQualificationForActivity(post.id, post.user, average, result, post.app);
+					var average = parseInt(activityRadio);
+					var result = postsList.getActivityResultFromAverage(average);
+					postsList.qualificationAdmin.saveQualificationForActivity(post.id, post.user, average, result, function(){
+						if(!postsList.historicSelected){
+							postsList.removePost(post);
+							$scope.$apply();
+						}
+					});
 
 				}else{
 					alert("Verifique que haya ingresado todos los campos para calificar");

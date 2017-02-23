@@ -72,7 +72,21 @@ QualificationAdmin.prototype.loadPendingPosts = function(callback){
 	that.loader.classList.remove("hide");
 
 	this.postsRef.orderByChild("result").equalTo(null).once('value', function(data){
-		callback(data.val());
+		var resData = data.val();
+		that.postsRef = that.database.ref("user-posts-reflexive");
+		that.postsRef.orderByChild("result").equalTo(null).once('value', function(datar){
+			if(datar.val()!=null){
+				var d = null;
+				for(d in datar.val())
+					resData[d] = datar.val()[d];
+
+				callback(resData);
+
+			}else{
+				callback(resData);
+			}
+		})
+
 		that.loader.className+=" hide";
 	});
 	
@@ -130,7 +144,15 @@ QualificationAdmin.prototype.onAuthStateChanged = function(user){
 	}
 }
 
-QualificationAdmin.prototype.saveQualificationForFood = function(id, user, average, r_pi, r_aa, r_gs, r_ch, result){
+QualificationAdmin.prototype.logOut = function(callback){
+	this.auth.signOut().then(function(){
+		callback();
+	}, function(error){
+		console.log("Error cerrando sesión");
+	})
+}
+
+QualificationAdmin.prototype.saveQualificationForFood = function(id, user, average, r_pi, r_aa, r_gs, r_ch, result, callback){
 
 	this.postsRef = this.database.ref("user-posts");
 	var that = this;
@@ -149,9 +171,20 @@ QualificationAdmin.prototype.saveQualificationForFood = function(id, user, avera
 			that.postsRef.off();
 			that.postsRef.update(data);
 
-			that.postsRef = that.database.ref("user-data-reflexive/"+user+"/"+id);
+			that.postsRef = that.database.ref("user-data-reflexive/"+user);
 			that.postsRef.off();
-			that.postsRef.update(data);
+			that.postsRef.orderByChild("id").equalTo(id).once('value', function(snap){
+				if(snap.val()!=null){
+					var dat = snap.val();
+					that.postsRef.child(Object.keys(dat)[0]).update(data, function(error){
+						if(error){
+							alert("Revise su conexión a internet o intentelo más tarde")
+						}else{
+							callback();
+						}
+					});
+				}
+			});
 
 		}else{
 			//Existe en corus
@@ -159,15 +192,27 @@ QualificationAdmin.prototype.saveQualificationForFood = function(id, user, avera
 			that.postsRef.off();
 			that.postsRef.update(data);
 
-			that.postsRef = that.database.ref("user-data/"+user+"/"+id);
+			that.postsRef = that.database.ref("user-data/"+user);
 			that.postsRef.off();
-			that.postsRef.update(data);
 
+			that.postsRef.orderByChild("id").equalTo(id).once('value', function(snap){
+				if(snap.val()!=null){
+					var dat = snap.val();
+					that.postsRef.child(Object.keys(dat)[0]).update(data, function(error){
+						if(error){
+							alert("Revise su conexión a internet o intentelo más tarde")
+						}else{
+							callback();
+						}
+					});
+
+				}
+			});
 		}
 	});
 }
 
-QualificationAdmin.prototype.saveQualificationForActivity = function(id, user, average, result){
+QualificationAdmin.prototype.saveQualificationForActivity = function(id, user, average, result, callback){
 
 	this.postsRef = this.database.ref("user-posts");
 	var that = this;
@@ -182,9 +227,20 @@ QualificationAdmin.prototype.saveQualificationForActivity = function(id, user, a
 			that.postsRef.off();
 			that.postsRef.update(data);
 
-			that.postsRef = that.database.ref("user-data-reflexive/"+user+"/"+id);
+			that.postsRef = that.database.ref("user-data-reflexive/"+user);
 			that.postsRef.off();
-			that.postsRef.update(data);
+			that.postsRef.orderByChild("id").equalTo(id).once('value', function(snap){
+				if(snap.val()!=null){
+					var dat = snap.val();
+					that.postsRef.child(Object.keys(dat)[0]).update(data, function(error){
+						if(error){
+							alert("Revise su conexión a internet o intentelo más tarde")
+						}else{
+							callback();
+						}
+					});
+				}
+			});
 
 		}else{
 			//Existe en corus
@@ -192,10 +248,20 @@ QualificationAdmin.prototype.saveQualificationForActivity = function(id, user, a
 			that.postsRef.off();
 			that.postsRef.update(data);
 
-			that.postsRef = that.database.ref("user-data/"+user+"/"+id);
+			that.postsRef = that.database.ref("user-data/"+user);
 			that.postsRef.off();
-			that.postsRef.update(data);
-
+			that.postsRef.orderByChild("id").equalTo(id).once('value', function(snap){
+				if(snap.val()!=null){
+					var dat = snap.val();
+					that.postsRef.child(Object.keys(dat)[0]).update(data, function(error){
+						if(error){
+							alert("Revise su conexión a internet o intentelo más tarde")
+						}else{
+							callback();
+						}
+					});
+				}
+			});
 		}
 	});
 
