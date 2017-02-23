@@ -106,42 +106,44 @@
 							<th>Alto</th> 
 						</tr> 
 					</thead> 
-					<tbody> 
+
+					<tbody>
 						<tr> 
 							<th scope="row">Procesamiento Industrial</th>
-							<td><input class="form_radio_button" type="radio" name="radioPI" value="0"/></td> 
-							<td><input class="form_radio_button" type="radio" name="radioPI" value="1"/></td>  
-							<td><input class="form_radio_button" type="radio" name="radioPI" value="3"/></td>  
-							<td><input class="form_radio_button" type="radio" name="radioPI" value="5"/></td>  
-							<td><input class="form_radio_button" type="radio" name="radioPI" value="7"/></td>  
-							<td><input class="form_radio_button" type="radio" name="radioPI" value="10"/></td>  
+
+							<td><input class="form_radio_button radioPI" type="radio" ng-model="post.r_pi" ng-value="0"/></td> 
+							<td><input class="form_radio_button radioPI" type="radio" ng-model="post.r_pi" ng-value="1"/></td>  
+							<td><input class="form_radio_button radioPI" type="radio" ng-model="post.r_pi" ng-value="3"/></td>  
+							<td><input class="form_radio_button radioPI" type="radio" ng-model="post.r_pi" ng-value="5"/></td>  
+							<td><input class="form_radio_button radioPI" type="radio" ng-model="post.r_pi" ng-value="7"/></td>  
+							<td><input class="form_radio_button radioPI" type="radio" ng-model="post.r_pi" ng-value="10"/></td>  
 						</tr>
 						<tr> 
 							<th scope="row">Azúcar Añadido</th>
-							<td><input class="form_radio_button" type="radio" name="radioAA" value="0"/></td> 
-							<td><input class="form_radio_button" type="radio" name="radioAA" value="0.5"/></td>  
-							<td><input class="form_radio_button" type="radio" name="radioAA" value="1"/></td>  
-							<td><input class="form_radio_button" type="radio" name="radioAA" value="1.5"/></td>  
-							<td><input class="form_radio_button" type="radio" name="radioAA" value="2.2"/></td>  
-							<td><input class="form_radio_button" type="radio" name="radioAA" value="3"/></td> 
+							<td><input class="form_radio_button radioAA" type="radio" ng-model="post.r_aa" ng-value="0"/></td> 
+							<td><input class="form_radio_button radioAA" type="radio" ng-model="post.r_aa" ng-value="0.5"/></td>  
+							<td><input class="form_radio_button radioAA" type="radio" ng-model="post.r_aa" ng-value="1"/></td>  
+							<td><input class="form_radio_button radioAA" type="radio" ng-model="post.r_aa" ng-value="1.5"/></td>  
+							<td><input class="form_radio_button radioAA" type="radio" ng-model="post.r_aa" ng-value="2.2"/></td>  
+							<td><input class="form_radio_button radioAA" type="radio" ng-model="post.r_aa" ng-value="3"/></td> 
 						</tr> 
 						<tr> 
 							<th scope="row">Grasas Saturadas</th> 
-							<td><input class="form_radio_button" type="radio" name="radioGS" value="0"/></td> 
-							<td><input class="form_radio_button" type="radio" name="radioGS" value="0.5"/></td>  
-							<td><input class="form_radio_button" type="radio" name="radioGS" value="1"/></td>  
-							<td><input class="form_radio_button" type="radio" name="radioGS" value="1.5"/></td>  
-							<td><input class="form_radio_button" type="radio" name="radioGS" value="2.2"/></td>  
-							<td><input class="form_radio_button" type="radio" name="radioGS" value="3"/></td> 
+							<td><input class="form_radio_button radioGS" type="radio" ng-model="post.r_gs" ng-value="0"/></td> 
+							<td><input class="form_radio_button radioGS" type="radio" ng-model="post.r_gs" ng-value="0.5"/></td>  
+							<td><input class="form_radio_button radioGS" type="radio" ng-model="post.r_gs" ng-value="1"/></td>  
+							<td><input class="form_radio_button radioGS" type="radio" ng-model="post.r_gs" ng-value="1.5"/></td>  
+							<td><input class="form_radio_button radioGS" type="radio" ng-model="post.r_gs" ng-value="2.2"/></td>  
+							<td><input class="form_radio_button radioGS" type="radio" ng-model="post.r_gs" ng-value="3"/></td> 
 						</tr> 
 						<tr> 
 							<th scope="row">Carbohidratos</th> 
-							<td><input class="form_radio_button" type="radio" name="radioCH" value="0"/></td> 
-							<td><input class="form_radio_button" type="radio" name="radioCH" value="0.5"/></td>  
-							<td><input class="form_radio_button" type="radio" name="radioCH" value="1"/></td>  
-							<td><input class="form_radio_button" type="radio" name="radioCH" value="1.5"/></td>  
-							<td><input class="form_radio_button" type="radio" name="radioCH" value="2.2"/></td>  
-							<td><input class="form_radio_button" type="radio" name="radioCH" value="3"/></td> 
+							<td><input class="form_radio_button radioCH" type="radio" ng-model="post.r_ch" ng-value="0"/></td> 
+							<td><input class="form_radio_button radioCH" type="radio" ng-model="post.r_ch" ng-value="0.5"/></td>  
+							<td><input class="form_radio_button radioCH" type="radio" ng-model="post.r_ch" ng-value="1"/></td>  
+							<td><input class="form_radio_button radioCH" type="radio" ng-model="post.r_ch" ng-value="1.5"/></td>  
+							<td><input class="form_radio_button radioCH" type="radio" ng-model="post.r_ch" ng-value="2.2"/></td>  
+							<td><input class="form_radio_button radioCH" type="radio" ng-model="post.r_ch" ng-value="3"/></td> 
 						</tr> 
 					</tbody> 
 				</table>
@@ -160,14 +162,13 @@
 						</thead> 
 						<tbody> 
 
-							<tr ng-init="postC.loadActivityPostQualification(post)"> 
-								<td> <input class="form_radio_button activityRadio" type="radio" ng-model="$parent.curActivityValue" ng-value="0"/></td>
-
-								<td> <input class="form_radio_button activityRadio" type="radio" ng-model="$parent.curActivityValue" ng-value="1" /></td>
-								<td> <input class="form_radio_button activityRadio" type="radio" ng-model="$parent.curActivityValue" ng-value="3" /></td>
-								<td> <input class="form_radio_button activityRadio" type="radio" ng-model="$parent.curActivityValue" ng-value="5" /></td>
-								<td> <input class="form_radio_button activityRadio" type="radio" ng-model="$parent.curActivityValue" ng-value="7" /></td>
-								<td> <input class="form_radio_button activityRadio" type="radio" ng-model="$parent.curActivityValue" ng-value="10" /></td> 
+							<tr ng-init=""> 
+								<td> <input class="form_radio_button activityRadio" type="radio" ng-model="post.average" ng-value="0"/></td>
+								<td> <input class="form_radio_button activityRadio" type="radio" ng-model="post.average" ng-value="1" /></td>
+								<td> <input class="form_radio_button activityRadio" type="radio" ng-model="post.average" ng-value="3" /></td>
+								<td> <input class="form_radio_button activityRadio" type="radio" ng-model="post.average" ng-value="5" /></td>
+								<td> <input class="form_radio_button activityRadio" type="radio" ng-model="post.average" ng-value="7" /></td>
+								<td> <input class="form_radio_button activityRadio" type="radio" ng-model="post.average" ng-value="10" /></td> 
 							</tr>
 						</tbody> 
 					</table>

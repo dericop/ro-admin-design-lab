@@ -7,7 +7,7 @@ angular.module('qualificationApp',[])
 		postsList.foodCategories = ["Desayuno", "Almuerzo", "Comida", "Algo"];
 		postsList.historicSelected = false;
 
-		$scope.curActivityValue = 0;
+		$scope.curActivityValue = 3;
 
 		qualificationAdmin = new QualificationAdmin();
 		var pendingItem = document.getElementById('btn-item-pending');
@@ -152,21 +152,26 @@ angular.module('qualificationApp',[])
 			return result;
 		}
 
+		postsList.setActivitySelected = function(post){
+			return post.average;
+		}
+
 		postsList.saveQualification = function(post){
 			if(postsList.isFood(post)){
-				var radioPI = $('input[name="radioPI"]:checked').val();
-				var radioAA = $('input[name="radioAA"]:checked').val();
-				var radioGS = $('input[name="radioGS"]:checked').val();
-				var radioCH = $('input[name="radioCH"]:checked').val();
+				var radioPI = $('.radioPI:checked').val();
+				var radioAA = $('.radioAA:checked').val();
+				var radioGS = $('.radioGS:checked').val();
+				var radioCH = $('.radioCH:checked').val();
 
 				if(radioPI!=undefined && radioAA!=undefined && radioGS!=undefined && radioCH!=undefined){
 					var average = Math.round(parseFloat(radioPI) + parseFloat(radioAA) +parseFloat(radioGS) + parseFloat(radioCH));
 					var result = postsList.getResultFromAverage(average);
-					postsList.qualificationAdmin.saveQualificationForFood(post.id,post.user,average, radioPI, radioAA, radioGS, radioCH, result, function(){
+					postsList.qualificationAdmin.saveQualificationForFood(post.id,post.user,average, parseFloat(radioPI), parseFloat(radioAA), parseFloat(radioGS), parseFloat(radioCH), result, function(){
 						if(!postsList.historicSelected){
 							postsList.removePost(post);
 							$scope.$apply();
 						}
+						alert("Calificado con éxito");
 					});
 
 				}else{
@@ -182,6 +187,8 @@ angular.module('qualificationApp',[])
 							postsList.removePost(post);
 							$scope.$apply();
 						}
+
+						alert("Calificado con éxito");
 					});
 
 				}else{

@@ -72,7 +72,7 @@ QualificationAdmin.prototype.loadPendingPosts = function(callback){
 	that.loader.classList.remove("hide");
 
 	this.postsRef.orderByChild("result").equalTo(null).once('value', function(data){
-		var resData = data.val();
+		var resData = data.val() || {};
 		that.postsRef = that.database.ref("user-posts-reflexive");
 		that.postsRef.orderByChild("result").equalTo(null).once('value', function(datar){
 			if(datar.val()!=null){
