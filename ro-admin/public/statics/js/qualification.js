@@ -13,6 +13,10 @@ angular.module('qualificationApp',[])
 		postsList.foodCategories = ["Desayuno", "Almuerzo", "Comida", "Algo"]; //Categoria de alimentos
 		postsList.historicSelected = false; //Indica si se quiere cargar pendientes o historicos
 
+		//Accesos al DOM
+		postsList.emailForm = document.getElementById("email");
+		postsList.passwordForm = document.getElementById("password");
+
 		//Variables de debug
 		$scope.curActivityValue = 3;
 
@@ -217,6 +221,16 @@ angular.module('qualificationApp',[])
 				}else{
 					alert("Verifique que haya ingresado todos los campos para calificar");
 				}
+			}
+		}
+
+		postsList.login = function(e){
+			if(postsList.emailForm.checkValidity() && postsList.passwordForm.checkValidity()){
+				e.preventDefault();
+				
+				postsList.qualificationAdmin.logIn(postsList.emailForm.value, postsList.passwordForm.value, function(){
+					postsList.loadData();
+				});
 			}
 		}
 

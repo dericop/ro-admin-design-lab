@@ -12,13 +12,11 @@ function QualificationAdmin(){
 
 	//Accesos al DOM
 	this.posts = document.getElementById("posts");
-	this.emailForm = document.getElementById("email");
-	this.passwordForm = document.getElementById("password");
-	this.loginButton = document.getElementById("btn_login");
+	
 	this.loader = document.getElementsByClassName("loader")[0];
 
 	//Listeners
-	this.loginButton.addEventListener("click", this.logIn.bind(this));
+	//this.loginButton.addEventListener("click", this.logIn.bind(this));
 }
 
 //Configuración de la aplicación de firebase
@@ -43,26 +41,24 @@ QualificationAdmin.prototype.initFirebase = function(){
 }
 
 //Evento para la definición del login
-QualificationAdmin.prototype.logIn = function(e){
+QualificationAdmin.prototype.logIn = function(emailValue, passvalue, callback){
 
-	if(this.emailForm.checkValidity() && this.passwordForm.checkValidity()){
-		e.preventDefault();
-		
-		this.auth.signInWithEmailAndPassword(this.emailForm.value, this.passwordForm.value).then(function(token){
-			//Login satisfactorio
-			//localstorage.setItem("firebase", window.firebase);
-			$.magnificPopup.close();
-		}).catch(function(error) {
-		  // Handle Errors here.
-		  var errorCode = error.code;
-		  var errorMessage = error.message;
-		  if (errorCode === 'auth/wrong-password') {
-		    alert('Contraseña Incorrecta.');
-		  } else if(errorCode == 'auth/user-not-found'){
-		    alert("El correo ingresado no está registrado");
-		  }
-		});
-	}
+	this.auth.signInWithEmailAndPassword(emailValue, passvalue).then(function(token){
+		//Login satisfactorio
+		//localstorage.setItem("firebase", window.firebase);
+		callback();
+		$.magnificPopup.close();
+	}).catch(function(error) {
+	  // Handle Errors here.
+	  var errorCode = error.code;
+	  var errorMessage = error.message;
+	  if (errorCode === 'auth/wrong-password') {
+	    alert('Contraseña Incorrecta.');
+	  } else if(errorCode == 'auth/user-not-found'){
+	    alert("El correo ingresado no está registrado");
+	  }
+	});
+	
 }
 
 //Carga los posts que están pendientes de calificación (corus y cocono)
