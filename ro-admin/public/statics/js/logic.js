@@ -25,7 +25,7 @@ QualificationAdmin.prototype.setupFirebase = function(){
 	    apiKey: "AIzaSyBQKctnO3-Bb_KfiFrvIBQxntmP9OUKpcU",
 	    authDomain: "reduccion-de-obesidad-7414c.firebaseapp.com",
 	    databaseURL: "https://reduccion-de-obesidad-7414c.firebaseio.com",
-	    storageBucket: "reduccion-de-obesidad-7414c.appspot.com",
+	    storageBucket: "https://reduccion-de-obesidad-7414c.appspot.com",
 	    messagingSenderId: "610665651722"
 	};
 	firebase.initializeApp(config);
