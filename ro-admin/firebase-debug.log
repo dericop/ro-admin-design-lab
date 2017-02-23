@@ -1,0 +1,55 @@
+[debug] ----------------------------------------------------------------------
+[debug] Command:      /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] CLI Version:  3.3.0
+[debug] Platform:     darwin
+[debug] Node Version: v6.9.5
+[debug] Time:         Thu Feb 23 2017 11:17:08 GMT-0500 (COT)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/xPaYXo_FWol22rmLiEn5DNl3K-vfMnLG7D2LwapBFEU',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Thu Feb 23 2017 11:17:08 GMT-0500 (COT)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/reduccion-de-obesidad-7414c  
+ Thu Feb 23 2017 11:17:09 GMT-0500 (COT)
+[debug] ----------------------------------------------------------------------
+[debug] Command:      /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] CLI Version:  3.3.0
+[debug] Platform:     darwin
+[debug] Node Version: v6.9.5
+[debug] Time:         Thu Feb 23 2017 11:23:42 GMT-0500 (COT)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/reduccion-de-obesidad-7414c  
+ Thu Feb 23 2017 11:23:42 GMT-0500 (COT)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/reduccion-de-obesidad-7414c/tokens  
+ Thu Feb 23 2017 11:23:44 GMT-0500 (COT)
+[debug] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'reduccion-de-obesidad-7414c'...
+[info] 
+[info] i  deploying database, hosting
+[info] ✔  database: rules ready to deploy.
+[info] i  hosting: preparing public directory for upload...
+[debug] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/reduccion-de-obesidad-7414c/uploads/-KdfmEd31TyL7b-rqGvQ?fileCount=9&message=  
+ Thu Feb 23 2017 11:23:53 GMT-0500 (COT)
+[debug] <<< HTTP RESPONSE 200
+[info] ✔  hosting: public folder uploaded successfully
+[info] ✔  hosting: 9 files uploaded successfully
+[info] i  starting release process (may take several minutes)...
+[debug] >>> HTTP REQUEST POST https://deploy.firebase.com/v1/projects/reduccion-de-obesidad-7414c/releases { database: { rulesString: '{\n  "rules": {\n    ".read": "auth != null",\n    ".write": "auth != null"\n  }\n}' },
+  hosting: 
+   { public: 'public',
+     cleanUrls: true,
+     ignore: [ 'firebase.json', 'database-rules.json', 'storage.rules' ],
+     version: '-KdfmEd31TyL7b-rqGvQ',
+     prefix: '-KdfmEd31TyL7b-rqGvQ/',
+     manifest: [] } } 
+ Thu Feb 23 2017 11:23:55 GMT-0500 (COT)

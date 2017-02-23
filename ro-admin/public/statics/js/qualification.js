@@ -1,26 +1,37 @@
+/*
+* Created by: Daniel Estiven Rico Posada
+* Laboratorio de Diseño Estratégico
+* Controlador de calificaciones
+*/
+
 angular.module('qualificationApp',[])
 	.controller('PostsController', ['$scope', function($scope){
 		var postsList = this;
-		postsList.posts = [];
-		postsList.lastPost = '';
-		postsList.qualificationAdmin = null;
-		postsList.foodCategories = ["Desayuno", "Almuerzo", "Comida", "Algo"];
-		postsList.historicSelected = false;
+		postsList.posts = []; //listado de posts
+		postsList.lastPost = ''; //último post publicado
+		postsList.qualificationAdmin = null; //referencia al modelo de calificación
+		postsList.foodCategories = ["Desayuno", "Almuerzo", "Comida", "Algo"]; //Categoria de alimentos
+		postsList.historicSelected = false; //Indica si se quiere cargar pendientes o historicos
 
+		//Variables de debug
 		$scope.curActivityValue = 3;
 
 		qualificationAdmin = new QualificationAdmin();
+
+		//Referencia de elementos del DOM
 		var pendingItem = document.getElementById('btn-item-pending');
 		var historicItem = document.getElementById('btn-item-historic');
 
-		pendingItem.className = "itemSelected";
+		pendingItem.className = "itemSelected"; //Seleccionar por defecto las publicaciones pendientes
 
+		//Evento para cerrar sesión
 		postsList.logOut = function(){
 			postsList.qualificationAdmin.logOut(function(){
 				postsList.loadData();
 			});
 		}
 
+		//Carga los datos en históricos o pendientes
 		postsList.loadData = function(){
 			postsList.posts = [];
 			if(postsList.historicSelected){
@@ -39,6 +50,7 @@ angular.module('qualificationApp',[])
 			window.qualificationAdmin = qualificationAdmin;
 		};
 
+		//Carga el resultado de posts pendientes en el feed visual
 		postsList.loadPostsInArray = function(data){
 			var d = null;
 			for(d in data)
@@ -48,6 +60,7 @@ angular.module('qualificationApp',[])
 				postsList.lastPost = d+"";
 		}
 
+		//Carga el resulto de posts históricos en el feed visual
 		postsList.loadHistoricPostsInArray = function(data){
 			for(d in data)
 				postsList.posts.push(data[d]);			
@@ -64,11 +77,13 @@ angular.module('qualificationApp',[])
 			
 		}
 
+		///DEBUG para la carga de calificaciones en items ya calificados
 		postsList.loadActivityPostQualification = function(post){
 			$scope.curActivityValue = post.average;
 			console.log($scope.curActivityValue);
 		}
 
+		//Carga la siguiente página del listado de históricos
 		postsList.nextPage = function(){
 			if(postsList.historicSelected){
 				postsList.qualificationAdmin.loadPostsStartAt(function(data){
@@ -87,6 +102,7 @@ angular.module('qualificationApp',[])
 			}
 		}
 
+		//Indica si un posts debe ser visible en una sección específica
 		postsList.shouldBeVisible = function(post){
 
 			if(postsList.historicSelected){
@@ -97,13 +113,14 @@ angular.module('qualificationApp',[])
 			return true;
 		}
 
-
+		//Indica si el post enviado es un alimento
 		postsList.isFood = function(post){
 			if(postsList.foodCategories.indexOf(post.category) != -1)
 				return true;
 			return false;
 		}
 
+		//Carga los datos de la pestaña pendientes
 		postsList.setPending = function(){
 			postsList.historicSelected = false;
 			pendingItem.className="itemSelected";
@@ -111,6 +128,7 @@ angular.module('qualificationApp',[])
 			postsList.loadData();
 		}
 
+		//Carga los datos de la pestaña históricos
 		postsList.setHistoric = function(){
 			postsList.historicSelected = true;
 			pendingItem.className="";
@@ -118,10 +136,12 @@ angular.module('qualificationApp',[])
 			postsList.loadData();
 		}
 
+		//Indica si el arreglo de posts está vacío
 		postsList.postsIsEmpty = function(){
 			return postsList.posts.length == 0;
 		}
 
+		//Obtiene el resultado de la publicación basados en su promedio
 		postsList.getResultFromAverage = function(average){
 			var result = 0;
 			if(average<=3){
@@ -134,12 +154,14 @@ angular.module('qualificationApp',[])
 			return result;
 		}
 
+		//Elimina un post de la lista de pendientes
 		postsList.removePost = function(post){
 			var index = postsList.posts.indexOf(post);
 			if(index>-1)
 				postsList.posts.splice(index, 1);
-		}
+		}	
 
+		//Obtiene el resultado de una actividad basados en su promedio
 		postsList.getActivityResultFromAverage = function(average){
 			var result = 0;
 			if(average<=3){
@@ -156,6 +178,7 @@ angular.module('qualificationApp',[])
 			return post.average;
 		}
 
+		//Guarda la calificación
 		postsList.saveQualification = function(post){
 			if(postsList.isFood(post)){
 				var radioPI = $('.radioPI:checked').val();
@@ -206,7 +229,5 @@ angular.module('qualificationApp',[])
 		postsList.loadData();
 
 		window.postsList = postsList;
-
-
 
 	}])

@@ -1,7 +1,7 @@
 /*
 * Created by: Daniel Estiven Rico Posada
 * Laboratorio de Diseño Estratégico
-* Sistema de administración para la calificación de usuarios
+* modelo necesario para la calificación de usuarios
 */
 'use strict';
 
@@ -65,6 +65,7 @@ QualificationAdmin.prototype.logIn = function(e){
 	}
 }
 
+//Carga los posts que están pendientes de calificación (corus y cocono)
 QualificationAdmin.prototype.loadPendingPosts = function(callback){
 	this.postsRef = this.database.ref("user-posts");
 	this.postsRef.off();
@@ -113,6 +114,7 @@ QualificationAdmin.prototype.loadPostsStartAt = function(callback, startat){
 	}
 }
 
+//Cargar el listado de publicaciones finalizando en la clave indicada
 QualificationAdmin.prototype.loadPostsEndAt = function(callback, endAt){
 	this.postsRef = this.database.ref("user-posts");
 	this.postsRef.off();
@@ -144,6 +146,7 @@ QualificationAdmin.prototype.onAuthStateChanged = function(user){
 	}
 }
 
+//Evento para cerrar sesión del admin
 QualificationAdmin.prototype.logOut = function(callback){
 	this.auth.signOut().then(function(){
 		callback();
@@ -152,10 +155,13 @@ QualificationAdmin.prototype.logOut = function(callback){
 	})
 }
 
+
+//Guardar la calificación del alimento
 QualificationAdmin.prototype.saveQualificationForFood = function(id, user, average, r_pi, r_aa, r_gs, r_ch, result, callback){
 
 	this.postsRef = this.database.ref("user-posts");
 	var that = this;
+	//Datos a almacenar
 	var data = {
 		average: average,
 	    r_pi: r_pi,
@@ -212,6 +218,7 @@ QualificationAdmin.prototype.saveQualificationForFood = function(id, user, avera
 	});
 }
 
+//Guardar calificación para una actividad.
 QualificationAdmin.prototype.saveQualificationForActivity = function(id, user, average, result, callback){
 
 	this.postsRef = this.database.ref("user-posts");
@@ -264,5 +271,4 @@ QualificationAdmin.prototype.saveQualificationForActivity = function(id, user, a
 			});
 		}
 	});
-
 }
