@@ -50,13 +50,15 @@ ChallengeAdmin.prototype.saveNewChallenge = function(title,initDate, endDate, ca
 	var that = this;
 	this.challengesRef = this.database.ref("challenges/"+id);
 	this.challengesRef.set(data, function(message){
-		callback();
+		callback(data);
 	});
 
 }
 
-ChallengeAdmin.prototype.deleteChallenge = function(callback){
-
+ChallengeAdmin.prototype.deleteChallenge = function(challenge, callback){
+	this.challengesRef = this.database.ref("challenges");
+	this.challengesRef.child(challenge).remove();
+	callback();
 }
 
 ChallengeAdmin.prototype.onAuthStateChanged = function(user){
@@ -69,13 +71,15 @@ ChallengeAdmin.prototype.onAuthStateChanged = function(user){
 }
 
 ChallengeAdmin.prototype.loadChallengesStartAt = function(callback, startAt){
+	console.log("Inicie en "+startAt);
+
 	this.challengesRef = this.database.ref("challenges");
 	this.challengesRef.off();
 	var that = this;
 
 	if(startAt != undefined){
 		console.log(startAt);
-		this,challengesRef.orderByKey().limitToFirst(10).startAt(startAt).once('value', function(data){
+		this.challengesRef.orderByKey().limitToFirst(10).startAt(startAt).once('value', function(data){
 			callback(data.val());
 		});
 	}else{
