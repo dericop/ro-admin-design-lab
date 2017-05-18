@@ -12,7 +12,6 @@ function QualificationAdmin(){
 
 	//Accesos al DOM
 	this.posts = document.getElementById("posts");
-	
 	this.loader = document.getElementsByClassName("loader")[0];
 
 	//Listeners

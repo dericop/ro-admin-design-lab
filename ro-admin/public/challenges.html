@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="qualificationApp">
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+	<link rel="stylesheet" href="libs/magnific-popup/magnific-popup.css">
+	<link rel="stylesheet" type="text/css" href="statics/css/styles.css">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta charset="utf-8">
+
+	<title>Reducción de Obesidad</title>
+
+</head>
+<body ng-controller="ChallengesController as challengeC">
+	<nav class="navbar navbar-default navbar-fixed-top top-nav">
+      <div class="container">
+        <div class="navbar-header center-block">
+          <a class="navbar-brand" href="#">CoRus - CoCono Calificación</a>
+        </div>
+        
+      </div>
+    </nav>
+
+	<div id="new-challenge-popup" class="white-popup mfp-hide">
+		<div class="login-container">
+			<div class="login-align">
+				<h2>Nuevo Reto</h2>
+
+				<form id="login-form">
+				  <div class="form-group">
+				    <label for="title">Título</label>
+				    <input type="text" class="form-control" id="title" placeholder="Título del reto" required>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label for="startDate">Fecha inicial</label>
+				    <input type="datetime-local" class="form-control" id="startDate" required>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label for="endDate">Fecha final</label>
+				    <input type="datetime-local" class="form-control" id="endDate" required>
+				  </div>
+
+				  <div id="loading-msj" class="alert alert-warning" role="alert"><span class="glyphicon glyphicon-refresh"></span> Creando reto...espera un momento</div>
+				  
+				  <div id="success-msj" class="alert alert-success" role="alert"><span class="glyphicon glyphicon-ok"></span>  ¡Reto creado con éxito!</div>
+
+				  <button id="btn_login" type="submit" class="btn btn-default" ng-click="challengeC.saveNewChallenge()">Guardar</button>
+				</form>	
+			</div>
+			
+		</div>
+	</div>
+
+	<div class="container feed-container">
+
+		<div class="pull-left">
+			<a id="btnItems" type="button" class="btn btn-success btn-logOut" href="index.html">Items</a>
+			<a id="btnChallenge" type="button" class="btn btn-success btn-logOut" href="challenges.html">Retos</a>
+			<a id="btnQuestions" type="button" class="btn btn-success btn-logOut" href="">Preguntas</a>
+		</div>
+
+		<button type="button" class="btn btn-success pull-right btn-logOut" ng-click="challengeC.logOut()">Cerrar Sesión</button>
+
+		<br>
+		<br>
+
+		<button id="btn_newChallenge" type="button" class="btn btn-link pull-left" ng-click="challengeC.add()"><span class="glyphicon glyphicon-plus"></span> Nuevo reto</button>
+
+		<br><br><br>
+		
+
+		<div class="loader loader--style8 center-block" title="7">
+		  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+		     width="44px" height="50px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+		    <rect x="0" y="10" width="4" height="10" fill="#333" opacity="0.2">
+		      <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0s" dur="0.6s" repeatCount="indefinite" />
+		      <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0s" dur="0.6s" repeatCount="indefinite" />
+		      <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0s" dur="0.6s" repeatCount="indefinite" />
+		    </rect>
+		    <rect x="8" y="10" width="4" height="10" fill="#333"  opacity="0.2">
+		      <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+		      <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+		      <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+		    </rect>
+		    <rect x="16" y="10" width="4" height="10" fill="#333"  opacity="0.2">
+		      <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+		      <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+		      <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+		    </rect>
+		  </svg>
+		</div>
+
+		<div class="row item" ng-repeat="ch in challengeC.challenges">
+			<div class="col-md-10">
+				<div>{{ ch.title }}</div>
+				<div><b>Fecha inicio:</b> {{challengeC.showDate(ch.initDate)}}</div>
+				<div><b>Fecha fin:</b> {{ ch.endDate }}</div>	
+			</div>
+			
+			<div>
+				<a><span class="glyphicon glyphicon-trash pull-right trashIcon"></span></a>	
+			</div>
+
+		</div>
+
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+	<script src="libs/magnific-popup/jquery.magnific-popup.min.js"></script>
+	<script src="statics/js/challengeLogic.js"></script>
+	<script src="statics/js/challengeModule.js"></script>
+	
+
+
+</body>
+</html>

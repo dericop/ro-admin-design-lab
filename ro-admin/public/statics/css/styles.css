@@ -112,6 +112,10 @@ th{
 	font-weight: 700;
 }
 
+.btnSelected{
+	background-color: rgba(107, 107, 107, 0.73);
+}
+
 .pagination{
 	margin-left: 40%;
 	font-size: 18px;
@@ -142,4 +146,14 @@ th{
 
 .btn-logOut{
 	margin-top: -40px;	
+}
+
+.trashIcon{
+	font-size: 25px;
+	margin-right: 20px;
+	margin-top: 20px;
+}
+
+#btn_newChallenge{
+	font-size: 16px;
 }

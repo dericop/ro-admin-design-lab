@@ -47,8 +47,15 @@
 
 	<div class="container feed-container">
 
+		<div class="pull-left">
+			<a id="btnItems" type="button" class="btn btn-success btn-logOut" href="index.html">Items</a>
+			<a id="btnChallenge" type="button" class="btn btn-success btn-logOut" href="challenges.html">Retos</a>
+			<a id="btnQuestions" type="button" class="btn btn-success btn-logOut" href="">Preguntas</a>
+		</div>
+
 		<button type="button" class="btn btn-success pull-right btn-logOut" ng-click="postC.logOut()">Cerrar Sesión</button>
 
+		<br>
 		<nav class="pagination-nav" aria-label="Page navigation">
 		  <ul class="pagination">
 		    <li>
@@ -181,8 +188,6 @@
 		</div>
 
 	</div>
-
-	
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

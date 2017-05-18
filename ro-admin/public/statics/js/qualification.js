@@ -13,6 +13,9 @@ angular.module('qualificationApp',[])
 		postsList.foodCategories = ["Desayuno", "Almuerzo", "Comida", "Algo"]; //Categoria de alimentos
 		postsList.historicSelected = false; //Indica si se quiere cargar pendientes o historicos
 
+		var btnItems = document.getElementById("btnItems");
+		btnItems.className += " btnSelected";
+
 		//Accesos al DOM
 		postsList.emailForm = document.getElementById("email");
 		postsList.passwordForm = document.getElementById("password");
