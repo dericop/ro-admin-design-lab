@@ -157,3 +157,11 @@ th{
 #btn_newChallenge{
 	font-size: 16px;
 }
+
+#btn_question_save{
+	margin-top: 2em;
+}
+
+#resp2-container{
+	margin-top: 2em;
+}

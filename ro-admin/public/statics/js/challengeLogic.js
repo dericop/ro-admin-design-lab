@@ -78,12 +78,12 @@ ChallengeAdmin.prototype.loadChallengesStartAt = function(callback, startAt){
 	var that = this;
 
 	if(startAt != undefined){
-		console.log(startAt);
-		this.challengesRef.orderByKey().limitToFirst(10).startAt(startAt).once('value', function(data){
+		console.log(startAt);//.limitToFirst(10)
+		this.challengesRef.orderByKey().startAt(startAt).once('value', function(data){
 			callback(data.val());
 		});
-	}else{
-		this.challengesRef.orderByKey().limitToFirst(10).once('value', function(data){
+	}else{//.limitToFirst(10)
+		this.challengesRef.orderByKey().once('value', function(data){
 			callback(data.val());
 		});
 	}

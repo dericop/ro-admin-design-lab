@@ -22,7 +22,7 @@
       </div>
     </nav>
 
-	<div id="new-challenge-popup" class="white-popup mfp-hide">
+	<div id="new-question-popup" class="white-popup mfp-hide">
 		<div class="login-container">
 			<div class="login-align">
 				<h2>Nueva Pregunta</h2>
@@ -34,20 +34,42 @@
 				  </div>
 				  
 				  <div class="form-group">
-				    <label for="response1">Respuesta 1</label>
-				    <input type="text" class="form-control" id="response1" placeholder="Respuesta 1" required>
+				    <label class="col-md-12" for="response1">Respuesta 1</label>
+
+				    <div class="col-md-2">
+				    	<span class="input-group-addon">
+					        <input type="checkbox" aria-label="...">
+					    </span>
+				    </div>
+
+				    <div class="col-md-10">
+				    	<input type="text" class="form-control" id="response1" placeholder="Respuesta 1" required>	
+				    </div>
+
 				  </div>
 
-				  <div class="form-group">
-				    <label for="response2">Respuesta 2</label>
-				    <input type="text" class="form-control" id="response2" placeholder="Respuesta 1" required>
+				  <div id="resp2-container" class="form-group">
+				    <label class="col-md-12" for="response2">Respuesta 2</label>
+
+				    <div class="col-md-2">
+				    	<span class="input-group-addon">
+					        <input type="checkbox" aria-label="...">
+					    </span>
+				    </div>
+				    
+				    <div class="col-md-10">
+				    	<input type="text" class="form-control" id="response2" placeholder="Respuesta 1" required>	
+				    </div>
+
+				    
 				  </div>
 
 				  <div id="loading-msj" class="alert alert-warning" role="alert"><span class="glyphicon glyphicon-refresh"></span> Creando pregunta...espera un momento</div>
 				  
 				  <div id="success-msj" class="alert alert-success" role="alert"><span class="glyphicon glyphicon-ok"></span>  Pregunta creada con éxito!</div>
 
-				  <button id="btn_login" type="submit" class="btn btn-default" ng-click="questionsC.saveNewChallenge()">Guardar</button>
+
+				  <button id="btn_question_save" type="submit" class="btn btn-default" ng-click="questionsC.saveNewChallenge()">Guardar</button>
 				</form>	
 			</div>
 			
