@@ -35,7 +35,7 @@ QuestionAdmin.prototype.loadQuestions = function(callback){
 	});
 }
 
-QuestionAdmin.prototype.saveNewQuestion = function(title, res1, res2, sDate, eDate,callback){
+QuestionAdmin.prototype.saveNewQuestion = function(title, res1, res2, sDate, eDate, correct, callback){
 		var id = this.database.ref("questions").push().key;
 
 		var data = {
@@ -43,15 +43,15 @@ QuestionAdmin.prototype.saveNewQuestion = function(title, res1, res2, sDate, eDa
 			title:title,
 			response1:res1,
 			response2:res2,
+			correct:correct,
 			startDate:sDate,
 			endDate:eDate
 		};
 
-		var that = this;
 		this.questionsRef = this.database.ref("questions/"+id);
 		this.questionsRef.set(data, function(message){
 			callback(data);
-		});	
+		});
 }
 
 QuestionAdmin.prototype.deleteQuestion = function(question, callback){

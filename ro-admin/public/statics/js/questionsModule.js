@@ -63,7 +63,7 @@ angular.module('qualificationApp',[])
 		};
 
 		questionList.removeQuestion = function(question){
-			var response = confirm("¿Está seguro que desea eliminar el reto?");
+			var response = confirm("¿Está seguro que desea eliminar la pregunta?");
 
 			if(response){
 				questionAdmin.deleteQuestion(question, function(){
@@ -85,12 +85,20 @@ angular.module('qualificationApp',[])
 			return nDate.toLocaleString();
 		}
 
+		questionList.showDate = function(date){
+			var nDate = new Date(date);
+			return nDate.toLocaleString();
+		}
+
 		questionList.saveNewChallenge = function(){
 			var inputTitle = document.getElementById("title");
 			var inputResp1 = document.getElementById("response1");
 			var inputResp2 = document.getElementById("response2");
 			var inputStartDate = document.getElementById("startDate");
 			var inputEndDate = document.getElementById("endDate");
+			var checkCorrect1 = document.querySelector("#correctCbx1:checked");
+			var checkCorrect2 = document.querySelector("#correctCbx2:checked");
+			var correct = "";
 
 			var title = inputTitle.value;
 			var response1 = inputResp1.value;
@@ -98,11 +106,19 @@ angular.module('qualificationApp',[])
 			var startDate = inputStartDate.value;
 			var endDate = inputEndDate.value;
 
+
+
 			if(title != "" && startDate != "" && endDate != "" 
-				&& response1 != "" && response2 != ""){
+				&& response1 != "" && response2 != "" && ( checkCorrect1 != undefined || checkCorrect2 != undefined)){
 
 				var sDate = (new Date(startDate)).getTime();
 				var eDate = (new Date(endDate)).getTime();
+
+				if(checkCorrect1 != undefined)
+					correct = response1;
+			
+				if(checkCorrect2 != undefined)
+					correct = response2;
 
 				loadingMsj.style.display = 'block';
 
@@ -112,7 +128,7 @@ angular.module('qualificationApp',[])
 				inputStartDate.disabled = true;
 				inputEndDate.disabled = true;
 
-				questionAdmin.saveNewQuestion(title, res1, res2, sDate, eDate, function(data){
+				questionAdmin.saveNewQuestion(title, response1, response2, sDate, eDate, correct, function(data){
 					loadingMsj.style.display = 'none';
 					successMsj.style.display = 'block';
 
