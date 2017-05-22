@@ -59,6 +59,12 @@ angular.module('qualificationApp',[])
 			console.log(data);
 		};
 
+		challengeList.logOut = function(){
+			challengeAdmin.logOut(function(){
+				challengeList.loadData();
+			});
+		}
+
 		challengeList.nextPage = function(){
 			challengeAdmin.loadChallengesStartAt(function(data){
 				challengeList.loadChallengesInArray(data);
@@ -133,6 +139,7 @@ angular.module('qualificationApp',[])
 				});
 			}
 		}
+
 
 		$(window).scroll(function() {
 		   if($(window).scrollTop() + $(window).height() == $(document).height()) {

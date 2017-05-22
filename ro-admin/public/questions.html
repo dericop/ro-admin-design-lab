@@ -22,6 +22,28 @@
       </div>
     </nav>
 
+    <div id="test-popup" class="white-popup mfp-hide">
+		<div class="login-container">
+			<div class="login-align">
+				<h2>Iniciar Sesión RO</h2>
+
+				<form id="login-form">
+				  <div class="form-group">
+				    <label for="email">Correo Electrónico</label>
+				    <input type="email" class="form-control" id="email" placeholder="Ej: lab.strategic.design@gmail.com" required>
+				  </div>
+				  <div class="form-group">
+				    <label for="password">Password</label>
+				    <input type="password" class="form-control" id="password" placeholder="contraseña" required>
+				  </div>
+				  
+				  <button id="btn_login" type="submit" class="btn btn-default" ng-click="postC.login($event)">Ingresar</button>
+				</form>	
+			</div>
+			
+		</div>
+	</div>
+
 	<div id="new-question-popup" class="white-popup mfp-hide">
 		<div class="login-container">
 			<div class="login-align">

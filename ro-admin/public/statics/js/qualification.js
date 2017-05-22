@@ -227,6 +227,7 @@ angular.module('qualificationApp',[])
 			}
 		}
 
+
 		postsList.login = function(e){
 			if(postsList.emailForm.checkValidity() && postsList.passwordForm.checkValidity()){
 				e.preventDefault();

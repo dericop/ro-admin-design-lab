@@ -64,9 +64,18 @@ ChallengeAdmin.prototype.deleteChallenge = function(challenge, callback){
 ChallengeAdmin.prototype.onAuthStateChanged = function(user){
 
 	if(firebase.auth().currentUser){
-		
+		$.magnificPopup.close();
 	}else{
-		
+		console.log("No tiene usuario");
+		$.magnificPopup.open({
+		  items: {
+		    src: '#test-popup', // can be a HTML string, jQuery object, or CSS selector
+		    type: 'inline',
+		  },
+		  closeOnBgClick :false, 
+		  closeOnContentClick : false, 
+	      showCloseBtn : false,
+		});
 	}
 }
 
@@ -87,6 +96,35 @@ ChallengeAdmin.prototype.loadChallengesStartAt = function(callback, startAt){
 			callback(data.val());
 		});
 	}
+}
+
+//Evento para cerrar sesión del admin
+ChallengeAdmin.prototype.logOut = function(callback){
+	this.auth.signOut().then(function(){
+		callback();
+	}, function(error){
+		console.log("Error cerrando sesión");
+	})
+}
+
+ChallengeAdmin.prototype.logIn = function(emailValue, passvalue, callback){
+
+	this.auth.signInWithEmailAndPassword(emailValue, passvalue).then(function(token){
+		//Login satisfactorio
+		//localstorage.setItem("firebase", window.firebase);
+		callback();
+		$.magnificPopup.close();
+	}).catch(function(error) {
+	  // Handle Errors here.
+	  var errorCode = error.code;
+	  var errorMessage = error.message;
+	  if (errorCode === 'auth/wrong-password') {
+	    alert('Contraseña Incorrecta.');
+	  } else if(errorCode == 'auth/user-not-found'){
+	    alert("El correo ingresado no está registrado");
+	  }
+	});
+	
 }
 
 

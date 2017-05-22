@@ -62,9 +62,18 @@ QuestionAdmin.prototype.deleteQuestion = function(question, callback){
 
 QuestionAdmin.prototype.onAuthStateChanged = function(user){
 	if(firebase.auth().currentUser){
-
+		$.magnificPopup.close();
 	}else{
-
+		console.log("No tiene usuario");
+		$.magnificPopup.open({
+		  items: {
+		    src: '#test-popup', // can be a HTML string, jQuery object, or CSS selector
+		    type: 'inline',
+		  },
+		  closeOnBgClick :false, 
+		  closeOnContentClick : false, 
+	      showCloseBtn : false,
+		});
 	}
 }
 
@@ -85,6 +94,15 @@ QuestionAdmin.prototype.loadQuestionsStartAt = function(callback, startAt){
 			callback(data.val());
 		});
 	}
+}
+
+//Evento para cerrar sesión del admin
+QuestionAdmin.prototype.logOut = function(callback){
+	this.auth.signOut().then(function(){
+		callback();
+	}, function(error){
+		console.log("Error cerrando sesión");
+	})
 }
 
 

@@ -44,6 +44,12 @@ angular.module('qualificationApp',[])
 			});
 		};
 
+		questionList.logOut = function(){
+			questionAdmin.logOut(function(){
+				questionList.loadData();
+			});
+		}
+
 		questionList.loadQuestionsInArray = function(data){
 			var d = null;
 			for(d in data)
