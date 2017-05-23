@@ -105,5 +105,27 @@ QuestionAdmin.prototype.logOut = function(callback){
 	})
 }
 
+QuestionAdmin.prototype.logIn = function(emailValue, passvalue, callback){
+
+	this.auth.signInWithEmailAndPassword(emailValue, passvalue).then(function(token){
+		//Login satisfactorio
+		//localstorage.setItem("firebase", window.firebase);
+		callback();
+		$.magnificPopup.close();
+	}).catch(function(error) {
+	  // Handle Errors here.
+	  var errorCode = error.code;
+	  var errorMessage = error.message;
+	  if (errorCode === 'auth/wrong-password') {
+	    alert('Contraseña Incorrecta.');
+	  } else if(errorCode == 'auth/user-not-found'){
+	    alert("El correo ingresado no está registrado");
+	  }
+	});
+	
+}
+
+
+
 
 

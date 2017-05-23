@@ -20,6 +20,10 @@ angular.module('qualificationApp',[])
 
 		questionList.loader.className+=" hide";
 
+		//Accesos al DOM
+		questionList.emailForm = document.getElementById("email");
+		questionList.passwordForm = document.getElementById("password");
+
 		questionList.add = function(){
 			$.magnificPopup.open({
 				  items: {
@@ -83,6 +87,16 @@ angular.module('qualificationApp',[])
 				if(questionList.questions[i].id === question){
 					questionList.questions.splice(i, 1);
 				}
+			}
+		}
+
+		questionList.login = function(e){
+			if(questionList.emailForm.checkValidity() && questionList.passwordForm.checkValidity()){
+				e.preventDefault();
+				
+				questionAdmin.logIn(questionList.emailForm.value, questionList.passwordForm.value, function(){
+					questionList.loadData();
+				});
 			}
 		}
 

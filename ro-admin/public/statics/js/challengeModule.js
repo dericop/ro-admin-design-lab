@@ -24,6 +24,9 @@ angular.module('qualificationApp',[])
 
 		challengeList.loader.className+=" hide";
 
+		challengeList.emailForm = document.getElementById("email");
+		challengeList.passwordForm = document.getElementById("password");
+
 		challengeList.add = function(){
 			$.magnificPopup.open({
 				  items: {
@@ -58,6 +61,16 @@ angular.module('qualificationApp',[])
 
 			console.log(data);
 		};
+
+		challengeList.login = function(e){
+			if(challengeList.emailForm.checkValidity() && challengeList.passwordForm.checkValidity()){
+				e.preventDefault();
+				
+				challengeAdmin.logIn(challengeList.emailForm.value, challengeList.passwordForm.value, function(){
+					challengeList.loadData();
+				});
+			}
+		}
 
 		challengeList.logOut = function(){
 			challengeAdmin.logOut(function(){
