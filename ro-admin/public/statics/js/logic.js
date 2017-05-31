@@ -153,6 +153,8 @@ QualificationAdmin.prototype.logOut = function(callback){
 //Guardar la calificación del alimento
 QualificationAdmin.prototype.saveQualificationForFood = function(id, user, average, r_pi, r_aa, r_gs, r_ch, result, callback){
 
+	console.log("average ", average);
+
 	this.postsRef = this.database.ref("user-posts");
 	var that = this;
 	//Datos a almacenar

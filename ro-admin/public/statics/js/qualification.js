@@ -193,6 +193,8 @@ angular.module('qualificationApp',[])
 				var radioGS = $('.radioGS:checked').val();
 				var radioCH = $('.radioCH:checked').val();
 
+				console.log("RadioPI" + radioPI);
+
 				if(radioPI!=undefined && radioAA!=undefined && radioGS!=undefined && radioCH!=undefined){
 					var average = Math.round(parseFloat(radioPI) + parseFloat(radioAA) +parseFloat(radioGS) + parseFloat(radioCH));
 					var result = postsList.getResultFromAverage(average);
